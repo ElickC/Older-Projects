@@ -1,0 +1,21 @@
+CC = g++
+OFLAGS = -c -Wall -ansi -pedantic -Werror
+CFLAGS = -Wall -ansi -pedantic -Werror
+LFLAGS = -lsfml-window -lsfml-graphics -lsfml-system
+
+
+all: ps2
+
+ps2: PTree.o main.o
+	$(CC) PTree.o main.o $(CFLAGS) $(LFLAGS)  -o PTree
+
+Main.o: main.cpp
+	$(CC) $(OFLAGS) $(LFLAGS) main.cpp
+
+PTree.o: PTree.cpp PTree.hpp
+	$(CC) $(OFLAGS) PTree.cpp
+
+clean:
+	\rm -f *.o  *~ PTree
+
+

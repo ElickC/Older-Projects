@@ -1,0 +1,11 @@
+output: test.o LFSR.o
+	g++ main.o LFSR.o -o output
+
+test.o: test.cpp
+	g++ -c test.cpp
+
+LFSR.o: LFSR.cpp LFSR.h
+	g++ -c LFSR.cpp
+
+clean:
+	rm *.o output

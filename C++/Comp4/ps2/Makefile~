@@ -1,0 +1,21 @@
+CC = g++
+CFLAGS = -std=c++11 -c -g -Og -Wall -Werror -pedantic
+OBJ = PhotoMagic.o LFSR.o
+DEPS = 
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+EXE = PhotoMagic
+
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(EXE) $(LIBS)
+
+PhotoMagic.o: PhotoMagic.cpp
+	$(CC) $(CFLAGS) -c $<
+
+LFSR.o: LFSR.cpp LFSR.hpp 
+	$(CC) $(CFLAGS) -c $<
+
+PhotoMagic: $(OBJ) 
+	$(cc) $(OBJ) -o ps1a
+
+clean:
+	rm $(OBJ) $(EXE)

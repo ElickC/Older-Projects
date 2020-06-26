@@ -1,0 +1,65 @@
+/**********************************************************************
+ *  Airport-readme template                                                   
+ *  Airport Simulation (C++11 Concurrency)                       
+ **********************************************************************/
+
+Your name: Elick Coval
+
+Operating system you're using (Linux, OS X, or Windows): Linux/Windows
+
+If Windows, which solution?: 10/Visual Studio
+
+Text editor or IDE you're using: Visual Studio Code
+
+Hours to complete assignment: 12
+
+/**********************************************************************
+ *  Briefly discuss the assignment itself and what you accomplished.
+ **********************************************************************/
+I was able to complete the assignment 100% after debugging on my machine 
+instead of the VM. 
+
+
+ /**********************************************************************
+ *  Discuss one or more key algorithms, data structures, or 
+ *  OO designs that were central to the assignment.
+ **********************************************************************/
+Mutex lock for all runways, switch statement for runway mutual exclusion
+
+
+/**********************************************************************
+ *  Briefly explain the workings of the features you implemented.
+ *  Include code excerpts.
+ **********************************************************************/
+Used the provided mutex with a condition variable to lock all runways
+if necessary. Then enter the first switch to determine which ruway is being
+used to lock other runway mutex's if necessary. On the other side, first 
+enter switch to unlock necessary runways, then make necessary notifications
+so next thread can land.
+
+
+ /**********************************************************************
+ *  Briefly explain what you learned in the assignment.
+ **********************************************************************/
+mutual exclusion and use of mutex's and condition variables
+
+
+/**********************************************************************
+ *  List whatever help (if any) you received from the instructor,
+ *  classmates, or anyone else.
+ **********************************************************************/
+Lot of code from lecture and given examples
+
+
+/**********************************************************************
+ *  Describe any serious problems you encountered.  
+ *  If you didn't complete any part of any assignment, 
+ *  the things that you didn't do, or didn't get working.                  
+ **********************************************************************/
+Trying to run this on VM was problematic, wasted a lot of time chasing
+erronius problems.
+
+
+/**********************************************************************
+ *  List any other comments here.                                     
+ **********************************************************************/
