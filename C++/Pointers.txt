@@ -1,0 +1,17 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int number[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    cout << "\n number    :  " << number;     //address of first element
+    cout << "\n&number    :  " << &number;    //address of first element
+    cout << "\n&number[0] :  " << &number[0]; //address of first element
+    cout << "\n*number    :  " << *number;    //The value stored in first element
+    cout << "\nnumber[0]  :  " << number[0];  //The value stored in first element
+
+    return 0;
+}
+Edit & Run

@@ -1,0 +1,63 @@
+Elick Coval
+
+CSC253 – Programming III 1 Assignment 2 (Ch. 11) (Total: 70 pts) [Note: Do not execute these programs on a computer] I. Read the code and write the outputs and explanations for the following program. (Total: 50 points) 
+
+
+A. What is displayed on the console when the following program is run? Explain Why (the detailed lists)?
+First line is “Trying” followed by a call to sampleMethod  passing  120. In sampleMethod there is another try block followed by a print statement “Starting sampleMethod with number 120”. The number IS greater than 100 so it throws a new Exception, which is caught in main but there is a finally block in sampleMethod which executes first printing “The finally clause is executed in sampleMethod”. The error message which was caught is then displayed “Catching in sampleMethod1” and then finally “End Program in main method.”
+Trying
+Starting sampleMethod with number 120
+The finally clause is executed in sampleMethod
+Catching in sampleMethod1
+End Program in main method.
+
+ B. How would this affect the output, if we change sampleMethod(60) on line 9? Explain Why (the detailed lists)?
+The first output would be the same, “Trying” then “Starting sampleMethod with number 60”. It would not be greater than 100, it would fall between 100 and 50, calling sampleMethod2 and passing 60. The next line would be “Catching in sampleMethod2 with number 60.0” and then it would rethrow Arithemetic Exception which would be caught by the catch in the same method because an ArithmeticException IS A RuntimeException, and it would display “Rethrowing in sampleMethod2”. It then executes the finally block in sampleMethod and prints “The finally clause is executed in sampleMethod” and “End of sampleMethod”. Since no exception was caught in main it continues to execute the next line printing “Trying after call” then “3.0 / 0 = Infinity” then finally “End Program in main method”.
+Trying
+Starting sampleMethod with number 60
+Catching in sampleMethod2 with number 60.0
+Rethrowing in sampleMethod2
+The finally clause is executed in sampleMethod
+End of sampleMethod
+Trying after call.
+3.0 / 0 = Infinity
+End Program in main method.
+
+ C. How would this affect the output, if we change sampleMethod(-9) on line 9 and enter a letter “h” after “Enter a number or character: “on line 26? Explain Why (the detailed lists)?
+The first output would be the same “Trying” then “Starting sampleMethod with number -9”, it would jump down to the else and print “Enter a number or character “, entering an h when the program expects an integer would throw an InputMistachException which would be printed by the following catch, and then the finally block would output “The finally clause is executed in sampleMethod”, then “End of sampleMethod”. Then it would continue after the sampleMethod call with “Trying after call.” and “3.0 / 0 = Infinity”, finally “End Program in main method.”
+Trying
+Starting sampleMethod with number -9
+Enter a number or character: 
+java.util.InputMismatchException
+The finally clause is executed in sampleMethod
+End of sampleMethod
+Trying after call.
+3.0 / 0 = Infinity
+End Program in main method.
+ D. How would this affect the output, if we change sampleMethod(-9) on line 9 and enter a number “6” after “Enter a number or character: “on line 26? Explain Why (the detailed lists)?
+The first output would be the same “Trying” then “Starting sampleMethod with number -9”, it would jump down to the else and print “Enter a number or character “, entering a 6 produces a divide by 0, ArithmeticException which gets printed by the following catch and then the finally block prints “The finally clause is executed in sampleMethod”, then “End of sampleMethod”. Then it would continue after the sampleMethod call with “Trying after call.” and “3.0 / 0 = Infinity”, finally “End Program in main method.”
+Trying
+Starting sampleMethod with number -9
+Enter a number or character: 
+java.lang.ArithmeticException
+The finally clause is executed in sampleMethod
+End of sampleMethod
+Trying after call.
+3.0 / 0 = Infinity
+End Program in main method.
+
+
+II. What is exactly output by the following program? (20 pts) [Note: Do not execute the program on a computer.] 
+
+
+
+1 //filename: Test.java 2 public class Test { 3 public static void method3 () throws RuntimeException { CSC253 – Programming III 3 4 throw new RuntimeException ("RuntimeException occurred in method3" ); 5 } //end method3 6 //method2 7 public static void method2 () throws RuntimeException { 8 try{ 9 method3 (); 10 } //try block 11 catch (RuntimeException exception) { 12 System.out.printf ("The following exception occurred in method2\n%s\n", 13 exception.getMessage ()); 14 throw exception; 15 } //end catch block 16 } // end method2 17 18 //method1 19 public static void method1 () throws RuntimeException { 20 try { 21 method2 (); 22 } 23 catch (RuntimeException exception) 24 { 25 System.out.printf ("The following exception occurred in method1\n%s\n", 26 exception.toString ()); 27 throw exception; 28 } 29 } // end method1 30 public static void main (String args[]) { 31 try { 32 method1 (); 33 } 34 catch (RuntimeException exception ) { 35 System.out.println ("The following exception occurred in main"); 36 System.out.println (exception); 37 } //end catch 38 }// end main 39 } // end class test 40
+The following exception occurred in method2
+RuntimeException occurred in method3
+The following exception occurred in method 1
+java.lang.RuntimeException – Occurred in method3
+The following exception occurred in main
+Java.lang.RuntimeException – Occurred in method3
+
+
+ [Hint: toString() method will be displayed the detail information with the name of exception and the exception occurred location.]

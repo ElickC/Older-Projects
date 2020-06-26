@@ -1,0 +1,77 @@
+INCLUDELIB UTIL.LIB
+INCLUDE PCMAC.INC
+       .model small
+	   .586
+       .stack  100
+       .data
+	   
+Prompt DB 'Enter a letter grade:$',13,10
+	   
+First DB 13,10, 6 DUP('* * * * * '),13,10, '$'
+Second DB  '* * * * *            This Certifies that          * * * * *',13,10,'$'
+Third DB '* * * * *               Elick M. Coval            * * * * *',13,10,'$'
+Fourth DB '* * * * *         has mastered Input/Output       * * * * *',13,10,'$'
+Fifth DB '* * * * *           in Assembly Language          * * * * *',13,10,'$'
+Sixth DB '* * * * *                  Grade:$'
+TailofSix DB '                * * * * *', '$'
+Seventh DB 13,10,"* * * * *          Today's date: $"
+TailofSeven DB '       * * * * *','$'
+
+Input DB ?
+Month DB ?
+Day	DB ?
+Year DW ?
+
+
+		.code 
+EXTRN PutDec:NEAR
+		
+Today 	PROC		    
+
+		_Begin
+		
+		_PutStr Prompt
+		
+		mov ah, 08h
+		int 21h
+		mov Input, al
+		
+		
+		_PutStr First
+		_PutStr Second
+        _PutStr Third
+		_PutStr Fourth
+		_PutStr Fifth
+		_PutStr Sixth
+		_PutCh Input
+		_PutStr TailofSix
+		_PutStr Seventh
+		
+		_GetDate
+		
+		mov Month,dh
+		mov Day,dl
+		mov Year,cx
+		
+		mov al,Month
+		mov ah,0
+		call PutDec
+		
+		_PutCh '/'
+		
+		mov al,Day
+		mov ah, 0
+		call PutDec	
+		
+		_PutCh '/'
+		
+		mov ax,Year
+		call PutDec
+		
+		_PutStr TailofSeven
+		_PutStr First
+
+		_Exit 0
+		
+Today ENDP
+        end Today

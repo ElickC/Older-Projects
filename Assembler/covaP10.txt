@@ -1,0 +1,49 @@
+; File Name:  GetStrWarmup.asm
+;             A small exercise to get you used to using _GetStr (DOS interrupt 0Ah)
+; Written by: Prof. Bleichman	
+;2.  _GetStr warmup:
+;Using _GetStr, write a program that asks the user for a name, 
+;then prints a greeting and the name and an exclamation point.  
+;i.e. "Good morning, Ferdinand!"
+;Remember that _GetStr inputs a carriage return character 
+;after the last byte of the string read in. 
+; Revision History
+; Date:         Revised By:      Action:
+; ------------------------------------------------------------------
+; 12/15/16		mb				created
+
+INCLUDE PCMAC.INC
+CR 		EQU 13
+LF  	EQU 10
+TERM  	EQU '$'
+N		EQU 80
+space 	EQU ' '
+EX		EQU '!'
+.MODEL SMALL
+.586
+.STACK 100h
+.DATA
+prompt	DB 'What is your name? ', TERM
+greet	DB CR, LF, 'Good morning, ', TERM
+buffer	DB N+1,0					; _GetStr adds CR at end, needs one more byte
+uname 	DB N+1 DUP(0)
+newline	DB CR, LF, TERM
+
+.CODE
+		EXTRN  GetDec :NEAR, PutDec : NEAR
+main:   _Begin  	
+	
+		_PutStr prompt
+		_GetStr buffer
+		
+		sub bx,bx
+		mov bl, [buffer+1]	; move actual length of string read in into bl
+		mov [uname + bx ],EX  ;this exclamation point is placed over the carriage return
+		mov [uname + bx+1 ],TERM  ;put a string terminator after that (another way to do this:  fill the buffer with terminators to begin with!)	
+		_PutStr newline
+		
+		_PutStr greet		; greeting	
+		_PutStr uname		; print out user name, plus exclamantion point
+
+        _Exit 0
+		End main
